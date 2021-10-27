@@ -1,0 +1,41 @@
+{% extends "base.html.j2"%}
+
+{% block content %}
+    <h1>Pokemon Search</h1>
+
+    <form action="/poki_find" method="POST">
+  <div class="mb-3">
+    <label for="poke_look" class="form-label">What pokemon are looking for?</label>
+    <input type="text" name="poke_look" class="form-control" id="poke_look">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    {% if error %}
+        <small style="color:grey;">{{error}}</small>
+    {% else %}
+        <small style="color:grey;">Search Results Here</small>
+    {% endif %}
+    {% if pmon %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Pokemon</th>
+                    <th scope="col">Base HP</th>
+                    <th scope="col">Base Attack</th>
+                    <th scope="col">Base Defence</th>
+                    <th scope="col">Image of Pokemon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{pmon['Pokemon_name']}}</th>
+                    <td>{{pmon['Base_HP']}}</td>
+                    <td>{{pmon['Base_Attack']}}</td>
+                    <td>{{pmon['Base_Defence']}}</td>
+                    <td ><img src="{{pmon['Image_of_Pokemon']}}"></td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
